@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { CategoryService } from '../../services/domain/category.service';
 
 @Component({
   selector: 'app-categories',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private navCtrl: NavController,
+    private categoryService: CategoryService,
+  ) {
+  }
 
   ngOnInit() {
+    this.categoryService.findAll().subscribe(response => {
+        console.log('response: ', response);
+      },
+      error => {
+        console.log('error: ', error);
+      });
   }
 
 }
