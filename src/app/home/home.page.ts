@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +7,18 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private navCtrl: NavController) {
+  constructor(
+    private navCtrl: NavController,
+    public menu: MenuController,
+  ) {
+  }
+
+  ionViewWillEnter() {
+    this.menu.enable(false); // desativa menu deslizante ao entrar na HomePage
+  }
+
+  ionViewDidLeave() {
+    this.menu.enable(true); // ativa menu deslizante ao sair da HomePage
   }
 
   login() {
