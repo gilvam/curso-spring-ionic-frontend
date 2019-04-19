@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from '../services/domain/category.service';
+import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +26,9 @@ import { CategoryService } from '../services/domain/category.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+
+    // interceptor
+    ErrorInterceptorProvider,
 
     // http services
     CategoryService,

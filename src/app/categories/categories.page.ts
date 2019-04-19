@@ -22,11 +22,9 @@ export class CategoriesPage implements OnInit {
 
   ngOnInit() {
     this.categoryService.findAll().subscribe(response => {
-        this.items = response;
-      },
-      error => {
-        console.log('error: ', error);
-      });
+      this.items = response;
+    }, error => { // console.log('error: ', error);
+    });
   }
 
 }
