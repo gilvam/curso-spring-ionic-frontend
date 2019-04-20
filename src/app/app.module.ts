@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from '../services/domain/category.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage-service';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AuthService } from '../services/auth.service';
 
     // http service
     AuthService,
+    StorageService,
 
     // http domain services (model services)
     CategoryService,

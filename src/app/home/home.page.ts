@@ -32,7 +32,7 @@ export class HomePage {
 
   login() {
     this.auth.authenticate(this.creds).subscribe(response => {
-      console.log('response: ', response);
+      this.auth.successfulLogin(response.headers.get('Authorization')); // seta token no localStorage
       this.navCtrl.navigateRoot('categories');
     }, error => {
     });
