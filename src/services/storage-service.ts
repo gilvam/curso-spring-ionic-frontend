@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalUser } from '../models/local-user';
+import { LocalUserModel } from '../models/local-user';
 import { STORAGE_KEYS } from '../config/storage-keys.config';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class StorageService {
   /**
    * obtem token usuário logado
    */
-  getLocalUser(): LocalUser {
+  getLocalUser(): LocalUserModel {
     const usr = localStorage.getItem(STORAGE_KEYS.localUser);
     if (usr == null) {
       return null;
@@ -20,7 +20,7 @@ export class StorageService {
   /**
    * armazena token usuário
    */
-  setLocalUser(localUser: LocalUser) {
+  setLocalUser(localUser: LocalUserModel) {
     if (localUser == null) {
       localStorage.removeItem(STORAGE_KEYS.localUser);
     } else {
