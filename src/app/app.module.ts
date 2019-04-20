@@ -14,6 +14,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage-service';
 import { ClientService } from '../services/domain/client.service';
+import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ClientService } from '../services/domain/client.service';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 
-    // interceptor
+    // interceptor (a execução dos interceptors é feita de a codo com a sua ordem de injeção)
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
 
     // http service
