@@ -27,10 +27,10 @@ export class AuthService {
   }
 
   successfulLogin(authorizationValue: string) {
-    const token = authorizationValue.substring(7);
+    const tok = authorizationValue.substring(7);
     const user: LocalUserModel = {
-      token: token,
-      email: this.jwtHelper.decodeToken(token).sub
+      token: tok,
+      email: this.jwtHelper.decodeToken(tok).sub
     };
 
     this.storage.setLocalUser(user);
