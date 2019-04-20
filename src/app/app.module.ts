@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from '../services/domain/category.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
+import { AuthService } from '../services/auth.service';
 
 
 @NgModule({
@@ -30,7 +31,10 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
     // interceptor
     ErrorInterceptorProvider,
 
-    // http services
+    // http service
+    AuthService,
+
+    // http domain services (model services)
     CategoryService,
   ],
   bootstrap: [AppComponent]

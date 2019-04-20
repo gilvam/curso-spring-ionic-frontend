@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { CredentiaisDto } from '../../models/credentiais.dto';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,13 +11,14 @@ import { CredentiaisDto } from '../../models/credentiais.dto';
 export class HomePage {
 
   creds: CredentiaisDto = {
-    email: '',
-    password: ''
+    email: 'geeddiill@gmail.com',
+    password: '123'
   };
 
   constructor(
     private navCtrl: NavController,
-    public menu: MenuController,
+    private menu: MenuController,
+    private auth: AuthService,
   ) {
   }
 
@@ -29,7 +31,10 @@ export class HomePage {
   }
 
   login() {
-    console.log('this.creds: ', this.creds);
-    this.navCtrl.navigateRoot('categories');
+    this.auth.authenticate(this.creds).subscribe(response => {
+      console.log('response: ', response);
+      this.navCtrl.navigateRoot('categories');
+    }, error => {
+    });
   }
 }
