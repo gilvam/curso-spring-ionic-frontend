@@ -30,6 +30,19 @@ export class HomePage {
     this.menu.enable(true); // ativa menu deslizante ao sair da HomePage
   }
 
+  /**
+   * Antes de qualquer ação na página,
+   * Atualiza o token antigo por um novo token válido
+   * essa ação é realizada se o token antigo estiver no localStorage e adicionado no header usando o auth-interceptor.ts
+   */
+  ionViewDidEnter() {
+    this.auth.refreshToken().subscribe(response => {
+      this.auth.successfulLogin(response.headers.get('Authorization')); // seta NOVO token refresh no localStorage
+      this.navCtrl.navigateRoot('categories');
+    }, error => {
+    });
+  }
+
   login() {
     this.auth.authenticate(this.creds).subscribe(response => {
       this.auth.successfulLogin(response.headers.get('Authorization')); // seta token no localStorage

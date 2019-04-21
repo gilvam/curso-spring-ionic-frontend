@@ -26,6 +26,15 @@ export class AuthService {
     );
   }
 
+  refreshToken() {
+    return this.http.post(`${ API_CONFIG.baseURL }/auth/refresh_token`, {},
+      {
+        observe: 'response', // pega header da response
+        responseType: 'text' // evitar erro de parse de JSON em um corpo vazio
+      }
+    );
+  }
+
   successfulLogin(authorizationValue: string) {
     const tok = authorizationValue.substring(7);
     const user: LocalUserModel = {
