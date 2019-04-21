@@ -93,7 +93,7 @@
         <ion-select-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-button color="primary" expand="block" type="submit" >Criar conta</ion-button>
+    <ion-button color="primary" expand="block" type="submit" [disabled]="formGroup.invalid" >Criar conta</ion-button>
   </form>
 
 </ion-content>

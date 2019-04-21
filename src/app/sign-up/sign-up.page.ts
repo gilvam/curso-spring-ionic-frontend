@@ -23,7 +23,7 @@ export class SignUpPage implements OnInit {
     public formBuilder: FormBuilder,
     public cityService: CityService,
     public stateService: StateService,
-    public clienteService: ClientService,
+    public clientService: ClientService,
     public alertCtrl: AlertController,
   ) {
     this.formGroup = this.formBuilder.group({
@@ -54,9 +54,6 @@ export class SignUpPage implements OnInit {
         },
         error => {
         });
-  }
-
-  ionViewDidLoad() {
   }
 
   updateCities() {
