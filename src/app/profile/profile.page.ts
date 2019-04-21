@@ -29,7 +29,12 @@ export class ProfilePage implements OnInit {
         this.getImageIfExists();
         // buscar imagem
       }, error => {
+        if (error.status === 403) {
+          this.navCtrl.navigateRoot('home');
+        }
       });
+    } else {
+      this.navCtrl.navigateRoot('home');
     }
   }
 
