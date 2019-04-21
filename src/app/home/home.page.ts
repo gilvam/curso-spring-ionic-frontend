@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { CredentiaisDto } from '../../models/credentiais.dto';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -49,5 +50,9 @@ export class HomePage {
       this.navCtrl.navigateRoot('categories');
     }, error => {
     });
+  }
+
+  signUp() {
+    this.navCtrl.navigateForward('sig-up');
   }
 }
