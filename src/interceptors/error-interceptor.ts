@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { StorageService } from '../services/storage-service';
 import { AlertController } from '@ionic/angular';
+import { FieldMessage } from '../models/field-message';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -17,7 +18,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError(err => {
-
         let e = err;
         if (e.error) { // se tem campo error (feito no back end)
           e = e.error;
@@ -31,6 +31,9 @@ export class ErrorInterceptor implements HttpInterceptor {
             break;
           case 403: // Forbidden | Access Denied
             this.handle403();
+            break;
+          case 422:
+            this.handle422(e)
             break;
           default:
             this.handleDefaultError(e);
@@ -55,14 +58,30 @@ export class ErrorInterceptor implements HttpInterceptor {
     this.storage.setLocalUser(null); // remove localUser do storage
   }
 
+  private async handle422(error) {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro 422: Validação',
+      message: this.listErrors(error.errors),
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   private async handleDefaultError(error) {
-    console.log('error: ', error);
     const alert = await this.alertCtrl.create({
       header: `Erro ${ error.status }: ${ error.error }`,
       message: error.message,
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  private listErrors(messages: FieldMessage[]): string {
+    let s = '';
+    messages.map(msg => {
+      s = s + '<p><strong>' + msg.fieldName + ': ' + '</strong>' + msg.message + '</p>';
+    });
+    return s;
   }
 }
 

@@ -22,4 +22,15 @@ export class ClientService {
     const url = `${ API_CONFIG.bucketBaseURL }/cp${ id }.jpg`;
     return this.http.get(url, { responseType: 'blob' });
   }
+
+  insert(clientDto: ClientDto) {
+    return this.http.post(
+      `${ API_CONFIG.baseURL }/clients`,
+      clientDto,
+      // {
+      //   observe: 'response',
+      //   responseType: 'text'
+      // }
+    );
+  }
 }

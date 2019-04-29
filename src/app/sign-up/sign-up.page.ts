@@ -19,12 +19,12 @@ export class SignUpPage implements OnInit {
   cities: CityDto[];
 
   constructor(
-    public navCtrl: NavController,
-    public formBuilder: FormBuilder,
-    public cityService: CityService,
-    public stateService: StateService,
-    public clientService: ClientService,
-    public alertCtrl: AlertController,
+    private navCtrl: NavController,
+    private formBuilder: FormBuilder,
+    private cityService: CityService,
+    private stateService: StateService,
+    private clientService: ClientService,
+    private alertCtrl: AlertController,
   ) {
     this.formGroup = this.formBuilder.group({
       name: ['Joaquim', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -33,10 +33,10 @@ export class SignUpPage implements OnInit {
       cpfOrCnpj: ['06134596280', [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
       password: ['123', [Validators.required]],
       addressName: ['Rua Via', [Validators.required]],
-      number: ['25', [Validators.required]],
+      addressNumber: ['25', [Validators.required]],
       complement: ['Apto 3', []],
       district: ['Copacabana', []],
-      zipCode: ['10828333', [Validators.required]],
+      addressZipCode: ['10828333', [Validators.required]],
       phone1: ['977261827', [Validators.required]],
       phone2: ['', []],
       phone3: ['', []],
@@ -68,11 +68,29 @@ export class SignUpPage implements OnInit {
   }
 
   signupUser() {
-    // this.clienteService.insert(this.formGroup.value)
-    //   .subscribe(response => {
-    //       this.showInsertOk();
-    //     },
-    //     error => {});
+    this.clientService.insert(this.formGroup.value)
+      .subscribe(response => {
+          this.showInsertOk();
+        },
+        error => {
+        });
+  }
+
+  private async showInsertOk() {
+    const alert = await this.alertCtrl.create({
+      header: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.navCtrl.navigateBack('home');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 
