@@ -27,4 +27,7 @@ export class CategoriesPage implements OnInit {
     });
   }
 
+  showProducts() {
+    this.navCtrl.navigateForward('products');
+  }
 }
