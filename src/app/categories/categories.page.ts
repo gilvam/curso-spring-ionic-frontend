@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { CategoryService } from '../../services/domain/category.service';
 import { CategoryDto } from '../../models/category.dto';
 import { API_CONFIG } from '../../config/api.config';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -15,6 +16,7 @@ export class CategoriesPage implements OnInit {
   items: CategoryDto[];
 
   constructor(
+    private router: Router,
     private navCtrl: NavController,
     private categoryService: CategoryService,
   ) {
@@ -23,11 +25,12 @@ export class CategoriesPage implements OnInit {
   ngOnInit() {
     this.categoryService.findAll().subscribe(response => {
       this.items = response;
-    }, error => { // console.log('error: ', error);
+    }, error => {
+      // console.log('error: ', error);
     });
   }
 
-  showProducts() {
-    this.navCtrl.navigateForward('products');
+  showProducts(categoryId) {
+    this.navCtrl.navigateForward(`products/${ categoryId }`);
   }
 }

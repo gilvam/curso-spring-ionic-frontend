@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductDto } from '../../models/product.dto';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController, NavParams, Platform } from '@ionic/angular';
+import { ActivatedRoute, ParamMap, Params, Route, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { ProductService } from '../../services/domain/product.service';
 
 @Component({
   selector: 'app-products',
@@ -12,22 +15,20 @@ export class ProductsPage implements OnInit {
   items: ProductDto[];
 
   constructor(
-    public navCtrl: NavController
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private navCtrl: NavController,
   ) {
   }
 
   ngOnInit(): void {
-    this.items = [
-      {
-        id: '1',
-        name: 'Mouse',
-        value: 80.99
+
+    const categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
+
+    this.productService.findByCategory(categoryId).subscribe((response: any) => {
+        this.items = response.content;
       },
-      {
-        id: '2',
-        name: 'Teclado',
-        value: 100.00
-      }
-    ];
+      error => {
+      });
   }
 }
