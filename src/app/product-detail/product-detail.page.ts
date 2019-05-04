@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/domain/product.service';
 import { NavController } from '@ionic/angular';
 import { API_CONFIG } from '../../config/api.config';
+import { CartService } from '../../services/domain/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,6 +19,7 @@ export class ProductDetailPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private navCtrl: NavController,
+    private cartService: CartService,
   ) {
   }
 
@@ -39,6 +41,11 @@ export class ProductDetailPage implements OnInit {
         },
         error => {
         });
+  }
+
+  addToCart(product: ProductDto) {
+    this.cartService.addProduct(product);
+    this.navCtrl.navigateRoot('cart');
   }
 
 }
