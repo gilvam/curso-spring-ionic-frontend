@@ -44,7 +44,7 @@ export class ProductsPage implements OnInit {
     });
   }
 
-  showDetail() {
-    this.navCtrl.navigateForward('product-detail');
+  showDetail(productId) {
+    this.navCtrl.navigateForward(`product-detail/${ productId }`);
   }
 }

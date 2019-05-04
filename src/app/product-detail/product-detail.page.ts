@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductDto } from '../../models/product.dto';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../../services/domain/product.service';
+import { NavController } from '@ionic/angular';
+import { API_CONFIG } from '../../config/api.config';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,15 +14,31 @@ export class ProductDetailPage implements OnInit {
 
   item: ProductDto;
 
-  constructor() {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private navCtrl: NavController,
+  ) {
   }
 
   ngOnInit() {
-    this.item = {
-      id: '1',
-      name: 'Mouse',
-      value: 80.59,
-    };
+    const productId = this.activatedRoute.snapshot.paramMap.get('productId');
+
+    this.productService.findById(productId).subscribe((response: any) => {
+        this.item = response;
+        this.getImageUrlIfExists();
+      },
+      error => {
+      });
+  }
+
+  getImageUrlIfExists() {
+    this.productService.getImageFromBucket(this.item.id)
+      .subscribe(response => {
+          this.item.imageUrl = `${ API_CONFIG.bucketBaseURL }/prod${ this.item.id }.jpg`;
+        },
+        error => {
+        });
   }
 
 }
