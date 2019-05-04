@@ -25,7 +25,7 @@ export class ProfilePage implements OnInit {
     const localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.clientService.findByEmail(localUser.email).subscribe(response => {
-        this.client = response;
+        this.client = response as ClientDto; // fazendo cast
         this.getImageIfExists();
         // buscar imagem
       }, error => {

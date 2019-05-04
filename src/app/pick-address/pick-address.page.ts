@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressDto } from '../../models/address.dto';
 import { NavController } from '@ionic/angular';
+import { ClientDto } from '../../models/client.dto';
+import { StorageService } from '../../services/storage-service';
+import { ClientService } from '../../services/domain/client.service';
 
 @Component({
   selector: 'app-pick-address',
@@ -13,43 +16,24 @@ export class PickAddressPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
+    private storage: StorageService,
+    private clientService: ClientService,
   ) { }
 
   ngOnInit() {
-    this.items = [
-      {
-        id: 1,
-        name: 'Rua Quinze de Novembro',
-        number: 300,
-        complement: 'Apto 200',
-        district: 'Santa Mônica',
-        zipCode: '48293822',
-        city: {
-          id: 1,
-          name: 'Uberlândia',
-          state: {
-            id: 1,
-            name: 'Minas Gerais'
-          }
+    const localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.clientService.findByEmail(localUser.email).subscribe((response: any) => {
+        this.items = response.addresses;
+        // buscar imagem
+      }, error => {
+        if (error.status === 403) {
+          this.navCtrl.navigateRoot('home');
         }
-      },
-      {
-        id: 2,
-        name: 'Rua Alexandre Toledo da Silva',
-        number: 405,
-        complement: null,
-        district: 'Centro',
-        zipCode: '88933822',
-        city: {
-          id: 3,
-          name: 'São Paulo',
-          state: {
-            id: 2,
-            name: 'São Paulo'
-          }
-        }
-      }
-    ];
+      });
+    } else {
+      this.navCtrl.navigateRoot('home');
+    }
   }
 
 }
