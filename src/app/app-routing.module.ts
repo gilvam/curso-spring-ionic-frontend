@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'sig-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' },
   { path: 'products/:categoryId', loadChildren: './products/products.module#ProductsPageModule' },
   { path: 'product-detail/:productId', loadChildren: './product-detail/product-detail.module#ProductDetailPageModule' },
-  { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' }
+  { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
+  { path: 'pick-address', loadChildren: './pick-address/pick-address.module#PickAddressPageModule' }
 ];
 
 @NgModule({

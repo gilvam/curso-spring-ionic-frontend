@@ -1,4 +1,4 @@
 export interface StateDto {
-  id: string;
+  id: number;
   name: string;
 }

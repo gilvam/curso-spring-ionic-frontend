@@ -1,4 +1,7 @@
+import { StateDto } from './state.dto';
+
 export interface CityDto {
-  id: string;
+  id: number;
   name: string;
+  state?: StateDto;
 }
