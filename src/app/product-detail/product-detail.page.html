@@ -9,6 +9,12 @@
 
 <ion-content padding>
 
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+    <ion-fab-button [routerLink]="'/cart'" size="small">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-card>
     <img [src]="item?.imageUrl || 'assets/img/prod.jpg'">
     <ion-card-header>

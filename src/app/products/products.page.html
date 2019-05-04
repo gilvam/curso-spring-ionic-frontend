@@ -8,6 +8,13 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+    <ion-fab-button [routerLink]="'/cart'" size="small">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <!-- List of Text Items -->
   <ion-list>
     <ion-item *ngFor="let item of items" (click)="showDetail(item.id)">

@@ -14,6 +14,7 @@ export class AppComponent {
   appPages = [
     { title: 'Categories', url: '/categories', icon: 'stats' },
     { title: 'Profile', url: '/profile', icon: 'contact' },
+    { title: 'Cart', url: '/cart', icon: 'cart' },
     { title: 'Logout', url: '/home', icon: 'log-out' },
   ];
 
