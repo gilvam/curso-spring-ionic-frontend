@@ -43,4 +43,8 @@ export class ProductsPage implements OnInit {
         });
     });
   }
+
+  showDetail() {
+    this.navCtrl.navigateForward('product-detail');
+  }
 }
