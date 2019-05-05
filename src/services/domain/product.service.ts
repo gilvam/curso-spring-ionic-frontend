@@ -19,11 +19,11 @@ export class ProductService {
     return this.http.get(`${ API_CONFIG.baseURL }/products/?categories=${ categoryId }`);
   }
 
-  getSmallImageFromBucket(id: string): Observable<any> {
+  getSmallImageFromBucket(id: number): Observable<any> {
     const url = `${ API_CONFIG.bucketBaseURL }/prod${ id }-small.jpg`;
     return this.http.get(url, { responseType: 'blob' });
   }
-  getImageFromBucket(id: string): Observable<any> {
+  getImageFromBucket(id: number): Observable<any> {
     const url = `${ API_CONFIG.bucketBaseURL }/prod${ id }.jpg`;
     return this.http.get(url, { responseType: 'blob' });
   }

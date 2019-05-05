@@ -27,8 +27,10 @@ export class CartService {
     const position = cart.items.findIndex(x => x.product.id === product.id);
     if (position === -1) { // se não existe na lista
       cart.items.push({ amount: 1, product: product });
+      this.storage.setCart(cart);
+    } else {
+      this.increaseQuantityProduct(product);
     }
-    this.storage.setCart(cart);
     return cart;
   }
 
