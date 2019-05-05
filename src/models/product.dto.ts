@@ -1,5 +1,5 @@
 export interface ProductDto {
-  id: string;
+  id: number;
   name: string;
   value: number;
   imageUrl?: string;

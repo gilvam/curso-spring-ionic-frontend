@@ -5,7 +5,6 @@ import { StorageService } from '../../services/storage-service';
 import { ClientService } from '../../services/domain/client.service';
 import { OrderDto } from '../../models/order.dto';
 import { CartService } from '../../services/domain/cart.service';
-import { ItemOrderDto } from '../../models/item-order.dto';
 import { Cart } from '../../models/cart';
 import { CartItem } from '../../models/cart-item';
 
@@ -41,7 +40,9 @@ export class PickAddressPage implements OnInit {
           client: { id: response.id },
           addressDelivery: null,
           payment: null,
-          items: cart.items.map((item: CartItem) => { return { amount: item.amount, product: { id: item.product.id } }; })
+          items: cart.items.map((item: CartItem) => {
+            return { amount: item.amount, product: { id: item.product.id } };
+          })
         };
 
         console.log('this.order: ', this.order);
@@ -59,7 +60,7 @@ export class PickAddressPage implements OnInit {
 
   nextPage(item: AddressDto) {
     this.order.addressDelivery = { id: item.id };
-    console.log('nextPage -> this.order: ', this.order);
+    this.navCtrl.navigateForward(['payment'], { queryParams: { order: JSON.stringify(this.order) } });
   }
 
 }

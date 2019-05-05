@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'products/:categoryId', loadChildren: './products/products.module#ProductsPageModule' },
   { path: 'product-detail/:productId', loadChildren: './product-detail/product-detail.module#ProductDetailPageModule' },
   { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
-  { path: 'pick-address', loadChildren: './pick-address/pick-address.module#PickAddressPageModule' }
+  { path: 'pick-address', loadChildren: './pick-address/pick-address.module#PickAddressPageModule' },
+  { path: 'payment', loadChildren: './payment/payment.module#PaymentPageModule' }
 ];
 
 @NgModule({
