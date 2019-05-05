@@ -35,6 +35,7 @@ export class PaymentPage implements OnInit {
   nextPage() {
     this.order.payment = this.formGroup.value;
     console.log('this.order: ', this.order);
+    this.navCtrl.navigateRoot(['order-confirmation'], { queryParams: { order: JSON.stringify(this.order) } });
   }
 
 }

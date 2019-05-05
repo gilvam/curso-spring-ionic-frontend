@@ -14,6 +14,10 @@ export class ClientService {
   ) {
   }
 
+  findById(id: number): Observable<any> {
+    return this.http.get(`${ API_CONFIG.baseURL }/clients/${ id }`);
+  }
+
   findByEmail(email: string): Observable<any> {
     return this.http.get(`${ API_CONFIG.baseURL }/clients/email?value=${ email }`);
   }
