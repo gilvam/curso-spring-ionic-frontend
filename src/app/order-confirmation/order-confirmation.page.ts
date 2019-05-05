@@ -7,6 +7,7 @@ import { ClientDto } from '../../models/client.dto';
 import { AddressDto } from '../../models/address.dto';
 import { ActivatedRoute } from '@angular/router';
 import { ClientService } from '../../services/domain/client.service';
+import { OrderService } from '../../services/domain/order.service';
 
 @Component({
   selector: 'app-order-confirmation',
@@ -25,6 +26,7 @@ export class OrderConfirmationPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private cartService: CartService,
     private clientService: ClientService,
+    private orderService: OrderService,
   ) {
     this.order = JSON.parse(this.activatedRoute.snapshot.queryParams.order);
   }
@@ -48,6 +50,21 @@ export class OrderConfirmationPage implements OnInit {
 
   total() {
     return this.cartService.total();
+  }
+
+  checkout() {
+    this.orderService.insert(this.order).subscribe(response => {
+        console.log('response.headers.get(location): ', response.headers.get('location'));
+      },
+      error => {
+        if (error.status === 403) {
+          this.navCtrl.navigateRoot('home');
+        }
+      });
+  }
+
+  back() {
+    this.navCtrl.navigateRoot('cart');
   }
 
 }

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { OrderConfirmationPage } from './order-confirmation.page';
+import { OrderService } from '../../services/domain/order.service';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [OrderConfirmationPage]
+  declarations: [OrderConfirmationPage],
+  providers: [
+    OrderService,
+  ]
 })
-export class OrderConfirmationPageModule {}
+export class OrderConfirmationPageModule {
+}
