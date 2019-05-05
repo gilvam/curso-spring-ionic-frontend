@@ -14,7 +14,7 @@
       <ion-label>Selecione um endereço</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let item of items">
-      <ion-label text-wrap>
+      <ion-label text-wrap (click)="nextPage(item)">
         <h3>{{ item.name }}, {{ item.number }}</h3>
         <p>{{ item.complement }} {{ item.district }} zipCode {{ item.zipCode }}</p>
         <p>{{ item.city.name }}, {{ item.city.state.name }}</p>
